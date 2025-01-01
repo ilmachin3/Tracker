@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct TrackerCategory {
+    let titles: String // Название категории
+    let trackers: [Tracker] // Массив трекеров в данной категории
+}

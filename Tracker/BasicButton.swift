@@ -2,7 +2,33 @@
 //  BasicButton.swift
 //  Tracker
 //
-//  Created by Илья Дышлюк on 01.01.2025.
+//  Created by Илья Дышлюк on 16.12.2024.
 //
 
 import Foundation
+import UIKit
+
+
+final class BasicButton: UIButton {
+    init(title: String) {
+        super.init(frame: .zero)
+        
+        backgroundColor = .black
+        tintColor = .white
+        layer.cornerRadius = 16
+        titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 4
+        
+        heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        setTitle(title, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
