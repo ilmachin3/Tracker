@@ -51,7 +51,7 @@ class HabitViewController: UIViewController {
     }()
     
     let arrayCells = ["Категория", "Расписание"]
-    let cellIdentifier = "CellType1"
+    let cellIdentifier = "CellTypeFirst"
     lazy var categoryAndScheduleCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -61,7 +61,7 @@ class HabitViewController: UIViewController {
         collectionView.backgroundColor = .clear
 //        collectionView.isScrollEnabled = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CellType1.self, forCellWithReuseIdentifier: "CellType1")
+        collectionView.register(CellTypeFirst.self, forCellWithReuseIdentifier: "CellTypeFirst")
         return collectionView
     }()
     
@@ -257,7 +257,7 @@ class HabitViewController: UIViewController {
     }
     
     private func updateCategoryLabel() {
-        guard let categoryCell = categoryAndScheduleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? CellType1 else { return }
+        guard let categoryCell = categoryAndScheduleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? CellTypeFirst else { return }
         // Создаем строку, содержащую названия всех выбранных категорий, разделенные запятыми
         let categoriesText = selectedCategory?.titles ?? ""
         // Обновляем текст в ячейке с категорией
@@ -320,7 +320,7 @@ extension HabitViewController: UICollectionViewDataSource {
     }
     
     private func cellCategoryAndSchedual(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CellType1
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CellTypeFirst
         
         // Проверяем, является ли текущая ячейка Расписанием
         if indexPath.row == 1 {

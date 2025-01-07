@@ -57,7 +57,7 @@ class AddCategoryViewController: UIViewController {
             categoryNameTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50),
             categoryNameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             categoryNameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            categoryNameTextField.heightAnchor.constraint(equalToConstant: 100),
+            categoryNameTextField.heightAnchor.constraint(equalToConstant: 75),
             
             doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),

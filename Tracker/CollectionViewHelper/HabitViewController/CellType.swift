@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // Ячейка типа 1
-class CellType1: UICollectionViewCell {
+class CellTypeFirst: UICollectionViewCell {
     
     var selectedDays: String? {
         didSet {
