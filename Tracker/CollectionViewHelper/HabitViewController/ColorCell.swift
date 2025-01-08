@@ -17,6 +17,8 @@ class ColorCell: UICollectionViewCell {
         view.layer.masksToBounds = true
         return view
     }()
+
+    private var cellColor: UIColor? // Добавляем свойство для хранения цвета
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,9 +46,16 @@ class ColorCell: UICollectionViewCell {
     
     func configure(with color: UIColor) {
         colorView.backgroundColor = color
+        cellColor = color  // Сохраняем цвет
+    }
+
+    override var isSelected: Bool { // Используем свойство isSelected
+        didSet {
+            setSelected(isSelected)
+        }
     }
     
-    func setSelected( _ selected: Bool) {
-        layer.borderColor = selected ? UIColor.gray.cgColor : UIColor.clear.cgColor
+    func setSelected(_ selected: Bool) {
+        layer.borderColor = selected ? cellColor?.cgColor : UIColor.clear.cgColor // Используем сохранённый цвет
     }
 }
