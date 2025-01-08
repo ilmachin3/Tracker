@@ -52,6 +52,7 @@ class HabitViewController: UIViewController {
     
     let arrayCells = ["Категория", "Расписание"]
     let cellIdentifier = "CellTypeFirst"
+    
     lazy var categoryAndScheduleCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -135,7 +136,7 @@ class HabitViewController: UIViewController {
         cancelButton.layer.masksToBounds = true
         cancelButton.tintColor = .red
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 19)
-        cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return cancelButton
     }()
     
@@ -148,7 +149,7 @@ class HabitViewController: UIViewController {
         createButton.layer.masksToBounds = true
         createButton.tintColor = .white
         createButton.titleLabel?.font = UIFont.systemFont(ofSize: 19)
-        createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return createButton
     }()
     
@@ -196,7 +197,7 @@ class HabitViewController: UIViewController {
             trackNaming.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 30),
             trackNaming.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             trackNaming.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            trackNaming.heightAnchor.constraint(equalToConstant: 50),
+            trackNaming.heightAnchor.constraint(equalToConstant: 75),
             
             characterLimitLabel.topAnchor.constraint(equalTo: trackNaming.bottomAnchor, constant: 5),
 //            characterLimitLabel.bottomAnchor.constraint(equalTo: contrainerView.topAnchor, constant: 10),
@@ -277,7 +278,7 @@ class HabitViewController: UIViewController {
     
     private func updateCreateButtonState() {
         createButton.isEnabled = checkFields()
-        createButton.backgroundColor = createButton.isEnabled ? .black : .lightGray
+        createButton.backgroundColor = createButton.isEnabled ? .yaBlack : .lightGray
     }
     
     @objc

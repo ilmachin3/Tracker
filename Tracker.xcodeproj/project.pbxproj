@@ -10,7 +10,7 @@
 		255BDD862D25BD8F00EDABFB /* trackerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD852D25BD8E00EDABFB /* trackerCell.swift */; };
 		255BDD882D25BECB00EDABFB /* CellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD872D25BECB00EDABFB /* CellCategory.swift */; };
 		255BDD8A2D25BEED00EDABFB /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD892D25BEED00EDABFB /* CellType.swift */; };
-		255BDD8C2D25BF0E00EDABFB /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD8B2D25BF0E00EDABFB /* ColorType.swift */; };
+		255BDD8C2D25BF0E00EDABFB /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD8B2D25BF0E00EDABFB /* ColorCell.swift */; };
 		255BDD8E2D25BF4200EDABFB /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD8D2D25BF4200EDABFB /* EmojiCell.swift */; };
 		255BDD902D25BF5D00EDABFB /* TimetableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD8F2D25BF5D00EDABFB /* TimetableTableViewCell.swift */; };
 		255BDD932D25BFB500EDABFB /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BDD922D25BFB500EDABFB /* AddCategoryViewController.swift */; };
@@ -67,7 +67,7 @@
 		255BDD852D25BD8E00EDABFB /* trackerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trackerCell.swift; sourceTree = "<group>"; };
 		255BDD872D25BECB00EDABFB /* CellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCategory.swift; sourceTree = "<group>"; };
 		255BDD892D25BEED00EDABFB /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
-		255BDD8B2D25BF0E00EDABFB /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
+		255BDD8B2D25BF0E00EDABFB /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		255BDD8D2D25BF4200EDABFB /* EmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		255BDD8F2D25BF5D00EDABFB /* TimetableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableTableViewCell.swift; sourceTree = "<group>"; };
 		255BDD922D25BFB500EDABFB /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
@@ -144,9 +144,9 @@
 		255BDD832D25BD3D00EDABFB /* HabitViewController */ = {
 			isa = PBXGroup;
 			children = (
-				255BDD872D25BECB00EDABFB /* CellCategory.swift */,
 				255BDD892D25BEED00EDABFB /* CellType.swift */,
-				255BDD8B2D25BF0E00EDABFB /* ColorType.swift */,
+				255BDD872D25BECB00EDABFB /* CellCategory.swift */,
+				255BDD8B2D25BF0E00EDABFB /* ColorCell.swift */,
 				255BDD8D2D25BF4200EDABFB /* EmojiCell.swift */,
 				255BDD8F2D25BF5D00EDABFB /* TimetableTableViewCell.swift */,
 			);
@@ -166,10 +166,10 @@
 			children = (
 				255BDD922D25BFB500EDABFB /* AddCategoryViewController.swift */,
 				255BDD942D25BFF000EDABFB /* CategoryViewController.swift */,
-				255BDD962D25C01C00EDABFB /* HabitViewController.swift */,
 				255BDD982D25C04200EDABFB /* IrregularEventViewController.swift */,
 				255BDD9A2D25C05D00EDABFB /* NewTrackerViewController.swift */,
 				255BDD9C2D25C08100EDABFB /* ScheduleViewController.swift */,
+				255BDD962D25C01C00EDABFB /* HabitViewController.swift */,
 			);
 			path = NavigateViewController;
 			sourceTree = "<group>";
@@ -393,7 +393,7 @@
 				255BDD902D25BF5D00EDABFB /* TimetableTableViewCell.swift in Sources */,
 				255BDDB22D25C55900EDABFB /* StubView.swift in Sources */,
 				255BDDA62D25C10400EDABFB /* NewTrackerDelegate.swift in Sources */,
-				255BDD8C2D25BF0E00EDABFB /* ColorType.swift in Sources */,
+				255BDD8C2D25BF0E00EDABFB /* ColorCell.swift in Sources */,
 				2591785F2CFF7BAE003CB07A /* ViewController.swift in Sources */,
 				255BDD972D25C01C00EDABFB /* HabitViewController.swift in Sources */,
 				255BDDAE2D25C52000EDABFB /* BasicButton.swift in Sources */,

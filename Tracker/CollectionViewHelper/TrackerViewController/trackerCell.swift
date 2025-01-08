@@ -143,7 +143,7 @@ class TrackerCell: UICollectionViewCell {
     }
     
     private func updateButtonAppearance() {
-        let buttonImage = isCompleted ? UIImage(named: "done") : UIImage(systemName: "plus")
+        let buttonImage = isCompleted ? UIImage(systemName: "checkmark") : UIImage(systemName: "plus")
         actionButton.setImage(buttonImage, for: .normal)
         actionButton.tintColor = isCompleted ? UIColor.white.withAlphaComponent(0.2) : UIColor.white
     }
