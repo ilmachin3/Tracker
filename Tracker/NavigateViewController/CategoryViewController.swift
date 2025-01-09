@@ -96,6 +96,9 @@ class CategoryViewController: UIViewController, NewCategoryViewControllerDelegat
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.separatorStyle = .none
+        tableView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -130,6 +133,46 @@ class CategoryViewController: UIViewController, NewCategoryViewControllerDelegat
         categories.append(category)
         removeStubAndShowCategories()
         dismiss(animated: true)
+    }
+    
+
+    // Метод добавления разделителя
+    private func addSeparator(to cell: UITableViewCell) {
+        let separatorView = UIView()
+        separatorView.backgroundColor = .lightGray
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(separatorView)
+
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20),
+            separatorView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20),
+            separatorView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if categories.count > 1 && indexPath.row < categories.count - 1 {
+            addSeparator(to: cell)
+        }
+        
+        if let cell = cell as? CategoryCell {
+            let cornerRadius: CGFloat = 10
+            
+            if categories.count == 1 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius // Закругляем все углы, если ячейка одна
+            } else if indexPath.row == 0 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius
+                cell.customBackgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // закругляем только верхние углы
+            } else if indexPath.row == categories.count - 1 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius
+                cell.customBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner] // закругляем только нижние углы
+            }
+            else {
+                cell.customBackgroundView.layer.cornerRadius = 0 // Не закругляем
+            }
+        }
+        
     }
 }
 

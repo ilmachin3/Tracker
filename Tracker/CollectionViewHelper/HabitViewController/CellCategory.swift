@@ -12,10 +12,10 @@ class CategoryCell: UITableViewCell {
     
     private var isSelectedCell: Bool = false
     
-    private let customBackgroundView: UIView = {
+    let customBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 10
+        //view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -54,10 +54,10 @@ class CategoryCell: UITableViewCell {
         customBackgroundView.addSubview(checkMarkImageView)
         
         NSLayoutConstraint.activate([
-            customBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            customBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             customBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             customBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            customBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            customBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             
             categoryLabel.topAnchor.constraint(equalTo: customBackgroundView.topAnchor, constant: 16),
             categoryLabel.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor, constant: 16),
