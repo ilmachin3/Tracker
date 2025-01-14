@@ -1,0 +1,85 @@
+//
+//  CellCategory.swift
+//  Tracker
+//
+//  Created by Илья Дышлюк on 01.01.2025.
+//
+
+import Foundation
+import UIKit
+
+class CategoryCell: UITableViewCell {
+    
+    private var isSelectedCell: Bool = false
+    
+    let customBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        //view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let checkMarkImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "checkmark"))
+        imageView.tintColor = .black
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+        backgroundColor = .white
+        selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = .clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        contentView.addSubview(customBackgroundView)
+        customBackgroundView.addSubview(categoryLabel)
+        customBackgroundView.addSubview(checkMarkImageView)
+        
+        NSLayoutConstraint.activate([
+            customBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            customBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            customBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            customBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
+            categoryLabel.topAnchor.constraint(equalTo: customBackgroundView.topAnchor, constant: 16),
+            categoryLabel.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor, constant: 16),
+            categoryLabel.trailingAnchor.constraint(equalTo: customBackgroundView.trailingAnchor, constant: -16),
+            categoryLabel.bottomAnchor.constraint(equalTo: customBackgroundView.bottomAnchor, constant: -16),
+            
+            checkMarkImageView.trailingAnchor.constraint(equalTo: customBackgroundView.trailingAnchor, constant: -16),
+            checkMarkImageView.centerYAnchor.constraint(equalTo: customBackgroundView.centerYAnchor),
+            checkMarkImageView.widthAnchor.constraint(equalToConstant: 14),
+            checkMarkImageView.heightAnchor.constraint(equalToConstant: 14)
+            
+        ])
+    }
+    
+    private func updateCheckmarkVisibility() {
+        checkMarkImageView.isHidden = !isSelectedCell
+    }
+    
+    func configure(withTitle title: String, backgroundColor: UIColor, isSelected: Bool) {
+        categoryLabel.text = title
+        customBackgroundView.backgroundColor = backgroundColor
+        isSelectedCell = isSelected
+        updateCheckmarkVisibility()
+    }
+}

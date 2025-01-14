@@ -10,13 +10,22 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    var window: UIWindow?
+    let tabBarController = UITabBarController()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//
+//            tabBarController.viewControllers = [UIViewController(nibName: nil, bundle: nil), UIViewController(nibName: nil, bundle: nil)]
+//            window?.rootViewController = tabBarController
+//            window?.makeKeyAndVisible()
+//            
+            
+            
+            // Override point for customization after application launch.
         return true
     }
-
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
