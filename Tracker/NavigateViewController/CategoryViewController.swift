@@ -103,6 +103,8 @@ final class CategoryViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
@@ -111,7 +113,7 @@ final class CategoryViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: addCategoryButton.topAnchor, constant: -20)
         ])
     }
-        
+    
     private func updateViewVisibility() {
         stubView.isHidden = !categories.isEmpty
         tableView.isHidden = categories.isEmpty
@@ -159,18 +161,18 @@ final class CategoryViewController: UIViewController {
     
     private func presentActions(for indexPath: IndexPath) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let editAction = UIAlertAction(title: "Редактировать", style: .default) { [weak self] _ in
             self?.editCategory(at: indexPath)
         }
-
+        
         let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
             self?.deleteCategory(at: indexPath)
         }
-
+        
         alertController.addAction(editAction)
         alertController.addAction(deleteAction)
-
+        
         present(alertController, animated: true, completion: nil)
     }
     
@@ -182,8 +184,48 @@ final class CategoryViewController: UIViewController {
         let nav = UINavigationController(rootViewController: addCategoryViewController)
         present(nav, animated: true)
     }
-}
+    
+    
+    // Метод добавления разделителя
+    private func addSeparator(to cell: UITableViewCell) {
+        let separatorView = UIView()
+        separatorView.backgroundColor = .lightGray
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(separatorView)
 
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20),
+            separatorView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20),
+            separatorView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if categories.count > 1 && indexPath.row < categories.count - 1 {
+            addSeparator(to: cell)
+        }
+
+        if let cell = cell as? CategoryCell {
+            let cornerRadius: CGFloat = 10
+
+            if categories.count == 1 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius // Закругляем все углы, если ячейка одна
+            } else if indexPath.row == 0 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius
+                cell.customBackgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // закругляем только верхние углы
+            } else if indexPath.row == categories.count - 1 {
+                cell.customBackgroundView.layer.cornerRadius = cornerRadius
+                cell.customBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner] // закругляем только нижние углы
+            }
+            else {
+                cell.customBackgroundView.layer.cornerRadius = 0 // Не закругляем
+            }
+        }
+
+    }
+}
+    
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
