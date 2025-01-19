@@ -18,6 +18,7 @@ final class NewTrackerViewController: UIViewController {
         let habitButton = BasicButton(title: "Привычка")
         habitButton.addTarget(self, action: #selector(habitButtonTapped), for: .touchUpInside)
         habitButton.translatesAutoresizingMaskIntoConstraints = false
+        
         return habitButton
     }()
     
@@ -37,6 +38,7 @@ final class NewTrackerViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         stackView()
+        habitButton.titleLabel?.textColor = .yaBlack
     }
     
     private func setupUI() {

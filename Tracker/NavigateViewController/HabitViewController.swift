@@ -318,7 +318,7 @@ final class HabitViewController: UIViewController {
     
     private func updateCreateButtonState() {
         createButton.isEnabled = checkFields()
-        createButton.backgroundColor = createButton.isEnabled ? .black : .lightGray
+        createButton.backgroundColor = createButton.isEnabled ? .yaBlack : .lightGray
     }
     
     private func saveTracker() {
