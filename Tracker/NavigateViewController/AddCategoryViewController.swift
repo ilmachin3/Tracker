@@ -8,9 +8,12 @@
 import Foundation
 import UIKit
 
-class AddCategoryViewController: UIViewController {
+final class AddCategoryViewController: UIViewController {
     
     weak var delegate: NewCategoryViewControllerDelegate?
+    weak var trackerCategoryStoreDelegate: TrackerCategoryStoreDelegate?
+    
+    private let trackerCategoryStore: TrackerCategoryStore
     
     private let label: UILabel = {
         let label = BasicTextLabel(text: "Новая категория")
@@ -36,6 +39,16 @@ class AddCategoryViewController: UIViewController {
         categoryNameTextField.translatesAutoresizingMaskIntoConstraints = false
         return categoryNameTextField
     }()
+    
+    init(trackerCategoryStore: TrackerCategoryStore) {
+        self.trackerCategoryStore = trackerCategoryStore
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        print("init(coder:) has not been implemented")
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +80,14 @@ class AddCategoryViewController: UIViewController {
     
     @objc private func addCategory() {
         guard let name = categoryNameTextField.text, !name.isEmpty else { return }
-        let newCategory = TrackerCategory(titles: name, trackers: []) // Используем инициализатор с передачей только названия
-        delegate?.didAddCategory(newCategory)
-        dismiss(animated: true)
+        
+        do {
+            try trackerCategoryStore.createCategory(with: name)
+            dismiss(animated: true)
+        } catch {
+            print("Ошибка при создании категории: \(error)")
+            return
+        }
     }
 }
 

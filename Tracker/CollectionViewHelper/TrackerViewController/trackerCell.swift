@@ -10,6 +10,14 @@ import UIKit
 
 class TrackerCell: UICollectionViewCell {
     
+    var isCompleted: Bool = false {
+        didSet {
+            updateButtonAppearance()
+        }
+    }
+    
+    private var currentDate: Date = Date()
+    
     let emojiLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 23)
@@ -75,12 +83,14 @@ class TrackerCell: UICollectionViewCell {
         
     }()
     
+    private lazy var tapAreaButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private var tracker: Tracker?
-    var isCompleted: Bool = false {
-        didSet {
-            updateButtonAppearance()
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,7 +98,22 @@ class TrackerCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        print("init(coder:) has not been implemented")
+        return nil
+    }
+    
+    func configure(with tracker: Tracker, isCompleted: Bool, completionCount: Int, currentDate: Date) {
+        self.tracker = tracker
+        self.currentDate = currentDate
+        nameLabel.text = tracker.name
+        daysLabel.text = formatDaysString(completionCount)
+        emojiLabel.text = String(tracker.emoji)
+        contrainerViewCell.backgroundColor = tracker.color
+        contrainerViewCell.layer.borderColor = tracker.color.withAlphaComponent(0.9).cgColor
+        buttonContainer.backgroundColor = tracker.color
+        buttonContainer.layer.borderColor = tracker.color.withAlphaComponent(0.9).cgColor
+        self.isCompleted = isCompleted
+        updateButtonAppearance()
     }
     
     private func setupViews() {
@@ -98,6 +123,7 @@ class TrackerCell: UICollectionViewCell {
         addSubview(daysLabel)
         addSubview(buttonContainer)
         addSubview(emojiPlaceholder)
+        addSubview(tapAreaButton)
         
         emojiPlaceholder.addSubview(emojiLabel)
         buttonContainer.addSubview(actionButton)
@@ -135,10 +161,15 @@ class TrackerCell: UICollectionViewCell {
             actionButton.centerXAnchor.constraint(equalTo: buttonContainer.centerXAnchor),
             actionButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor),
             actionButton.widthAnchor.constraint(equalToConstant: 40),
-            actionButton.heightAnchor.constraint(equalToConstant: 40)
+            actionButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            tapAreaButton.centerXAnchor.constraint(equalTo: buttonContainer.centerXAnchor),
+            tapAreaButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor),
+            tapAreaButton.widthAnchor.constraint(equalToConstant: 44),
+            tapAreaButton.heightAnchor.constraint(equalToConstant: 44)
         ])
         
-        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        //actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         updateButtonAppearance()
     }
     
@@ -146,6 +177,8 @@ class TrackerCell: UICollectionViewCell {
         let buttonImage = isCompleted ? UIImage(systemName: "checkmark") : UIImage(systemName: "plus")
         actionButton.setImage(buttonImage, for: .normal)
         actionButton.tintColor = isCompleted ? UIColor.white.withAlphaComponent(0.2) : UIColor.white
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+        actionButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
     }
     
     private func formatDaysString(_ count: Int) -> String {
@@ -159,23 +192,21 @@ class TrackerCell: UICollectionViewCell {
         }
     }
     
-    func configure(with tracker: Tracker, isCompleted: Bool, completionCount: Int) {
-        self.tracker = tracker
-        nameLabel.text = tracker.name
-        daysLabel.text = formatDaysString(completionCount)
-        emojiLabel.text = String(tracker.emoji)
-        contrainerViewCell.backgroundColor = tracker.color
-        contrainerViewCell.layer.borderColor = tracker.color.withAlphaComponent(0.9).cgColor
-        buttonContainer.backgroundColor = tracker.color
-        actionButton.tintColor = .white
-        self.isCompleted = isCompleted
-        backgroundColor = .white
-    }
     
     @objc private func actionButtonTapped() {
         guard let tracker = tracker else { return }
+        
+        let today = Calendar.current.startOfDay(for: Date())
+        let selectedDay = Calendar.current.startOfDay(for: currentDate)
+        
+        if selectedDay > today {
+            print("Нельзя отмечать трекеры для будущих дат.")
+            return
+        }
+        
         isCompleted.toggle()
         NotificationCenter.default.post(name: .trackerCompletionChanged, object: nil, userInfo: ["trackerId": tracker.id, "isCompleted": isCompleted])
+        updateButtonAppearance()
     }
     
 }
@@ -199,7 +230,8 @@ class HeaderViewTrackerCollection: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        print("init(coder:) has not been implemented")
+        return nil
     }
 }
 

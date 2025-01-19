@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol TrackerCategoryProtocol {
+    var titles: String { get }
+}
