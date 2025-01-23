@@ -36,7 +36,7 @@ final class TrackerRecordStore {
     }
     
     func fetchAllRecords() -> [TrackerRecordCoreData] {
-        return fetchedResultsController?.fetchedObjects ?? []
+        fetchedResultsController?.fetchedObjects ?? []
     }
     
     func saveRecord(date: Date) {

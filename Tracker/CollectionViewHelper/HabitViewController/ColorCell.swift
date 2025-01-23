@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ColorCell: UICollectionViewCell {
+final class ColorCell: UICollectionViewCell {
     
     private let colorView: UIView = {
         let view = UIView()

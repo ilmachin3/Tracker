@@ -29,7 +29,7 @@ final class TrackerViewController: UIViewController {
     private var trackerStore: TrackerStore
     private var trackerCategoryStore: TrackerCategoryStore
     private var trackers: [Tracker] = []
-
+    
     internal var categories: [TrackerCategory] = [] {
         didSet {
             print("Категории обновлены. Текущее количество категорий: \(categories.count)")
@@ -217,18 +217,18 @@ final class TrackerViewController: UIViewController {
             trackerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
     }
-        
+    
     private func updateStubViewVisibility() {
         stubView.isHidden = !categories.isEmpty
         collectionView.isHidden = categories.isEmpty
     }
-
+    
     private func filterTrackersByDate() {
         let selectedDayOfWeek = Calendar.current.component(.weekday, from: currentDate)
         guard let selectedDay = Days(dayNumber: selectedDayOfWeek) else { return }
-
+        
         var updatedCategories: [TrackerCategory] = []
-
+        
         for category in allCategories {
             let filteredTrackers = category.trackers.filter { tracker in
                 (tracker.schedule.isEmpty || tracker.schedule.contains(selectedDay)) &&
@@ -238,12 +238,12 @@ final class TrackerViewController: UIViewController {
                 updatedCategories.append(TrackerCategory(titles: category.titles, trackers: filteredTrackers))
             }
         }
-
+        
         categories = updatedCategories
         collectionView.reloadData()
         updateStubViewVisibility()
     }
-
+    
     @objc
     private func trackerCompletionChanged(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
@@ -375,8 +375,8 @@ extension TrackerViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            self.searchText = searchText
-            filterTrackersByDate()
+        self.searchText = searchText
+        filterTrackersByDate()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -64,7 +64,7 @@ final class TrackerStore: NSObject {
             let context = appDelegate.persistantContainer.viewContext
             self.init(context: context)
         } else {
-            print("Unable to acces the AppDelegate")
+            print("Unable to access the AppDelegate")
             self.init(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
         }
     }

@@ -339,12 +339,9 @@ final class HabitViewController: UIViewController {
             schedule: Array(selectedDays)
         )
         
-        do {
-            trackerCategoryStore.saveTracker(newTracker, forCategoryTitle: category.titles)
-            trackerDelegate?.didFinishCreatingTracker(trackerType: trackerType ?? .habit)
-        } catch {
-            print("ошибка сохранение трекера \(error)")
-        }
+        trackerCategoryStore.saveTracker(newTracker, forCategoryTitle: category.titles)
+        trackerDelegate?.didFinishCreatingTracker(trackerType: trackerType ?? .habit)
+
     }
     
     @objc

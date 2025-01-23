@@ -9,12 +9,10 @@ import UIKit
 import CoreData
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //var window: UIWindow?
     let tabBarController = UITabBarController()
-    private let colorTransformedToData = ColorTransformedToData()
-    private let scheduleTransformedToData = ScheduleTransformedToData()
     
     lazy var persistantContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")

@@ -442,11 +442,7 @@ extension IrregularEventViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == colorCollectionView {
-            return 10
-        } else {
-            return 0
-        }
+        collectionView == colorCollectionView ? 10 : 0
     }
 }
 
