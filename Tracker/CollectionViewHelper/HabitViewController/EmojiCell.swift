@@ -31,7 +31,12 @@ class EmojiCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        print("init(coder:) has not been implemented")
+        return nil
+    }
+    
+    func setSelected( _ selected: Bool) {
+        selectedPlaceholder.isHidden = !selected
     }
 
     private func setupUI() {
@@ -50,7 +55,4 @@ class EmojiCell: UICollectionViewCell {
         ])
     }
     
-    func setSelected( _ selected: Bool) {
-        selectedPlaceholder.isHidden = !selected
-    }
 }

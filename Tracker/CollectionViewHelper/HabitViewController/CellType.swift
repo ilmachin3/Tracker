@@ -25,8 +25,6 @@ class CellTypeFirst: UICollectionViewCell {
         return label
     }()
     
-    //Tекст в Категория
-    
     let resultLabel: UILabel = {
         let label = UILabel()
         label.textColor = .yaGray

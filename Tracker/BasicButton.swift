@@ -13,7 +13,7 @@ final class BasicButton: UIButton {
     init(title: String) {
         super.init(frame: .zero)
         
-        backgroundColor = .black
+        backgroundColor = .yaBlack
         tintColor = .white
         layer.cornerRadius = 16
         titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -29,6 +29,7 @@ final class BasicButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        print("init(coder:) has not been implemented")
+        return nil
     }
 }

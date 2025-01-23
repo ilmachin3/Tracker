@@ -11,15 +11,16 @@ import UIKit
 final class NewTrackerViewController: UIViewController {
         
     weak var delegate: NewTrackerDelegate?
-    var createdTracker: Tracker? // Добавляем свойство для хранения созданного трекера
+    
+    private let trackerCategoryStore = TrackerCategoryStore()
     
     private lazy var habitButton: UIButton = {
         let habitButton = BasicButton(title: "Привычка")
         habitButton.addTarget(self, action: #selector(habitButtonTapped), for: .touchUpInside)
         habitButton.translatesAutoresizingMaskIntoConstraints = false
+        
         return habitButton
     }()
-    
     
     private lazy var irregularEvent: UIButton = {
         let irregularEvent = BasicButton(title: "Нерегулярные события")
@@ -35,9 +36,9 @@ final class NewTrackerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         stackView()
+        habitButton.titleLabel?.textColor = .yaBlack
     }
     
     private func setupUI() {
@@ -66,26 +67,26 @@ final class NewTrackerViewController: UIViewController {
     }
     
     @objc private func habitButtonTapped() {
-        let habitViewController = HabitViewController()
+        let habitViewController = HabitViewController(trackerCategoryStore: trackerCategoryStore)
         habitViewController.trackerDelegate = self
         habitViewController.trackerType = .habit
-        let nav = UINavigationController(rootViewController: habitViewController)
-        present(nav, animated: true)
+        navigationController?.pushViewController(habitViewController, animated: true)
         print("habbit button tapped")
     }
     
     @objc private func irregularEventTapped() {
-        let irregularEventViewController = IrregularEventViewController()
+        let irregularEventViewController = IrregularEventViewController(trackerCategoryStore: trackerCategoryStore)
+        irregularEventViewController.trackerDelegate = self
         irregularEventViewController.trackerType = .event
-        let nav = UINavigationController(rootViewController: irregularEventViewController)
-        present(nav, animated:  true)
+        navigationController?.pushViewController(irregularEventViewController, animated: true)
         print("irregular button tapped")
     }
 }
 
 extension NewTrackerViewController: NewTrackerDelegate {
-    func didAddTracker(_ tracker: Tracker, to category: TrackerCategory, trackerType: TrackerType) {
-        // Передаем созданный трекер делегату
-        delegate?.didAddTracker(tracker, to: category, trackerType: trackerType)
+    func didFinishCreatingTracker(trackerType: TrackerType) {
+        dismiss(animated: true) {
+            print("Трекер типа \(trackerType) был успешно создан.")
+        }
     }
 }
